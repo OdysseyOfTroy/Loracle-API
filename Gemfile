@@ -36,6 +36,8 @@ group :development, :test do
   gem 'factory_bot_rails', '~> 6.1'
 
   gem 'simplecov', '~> 0.21.2'
+
+  gem 'rspec-collection_matchers', '~> 1.2'
 end
 
 group :development do
