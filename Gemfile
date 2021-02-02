@@ -34,10 +34,16 @@ group :development, :test do
   gem 'rspec-rails', '~> 4.0', '>= 4.0.2'
 
   gem 'factory_bot_rails', '~> 6.1'
+
+  gem 'simplecov', '~> 0.21.2'
 end
 
 group :development do
   gem 'rubocop', '~> 1.9', '>= 1.9.1'
+end
+
+group :test do
+  gem 'database_cleaner-active_record', '~> 2.0'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
