@@ -9,3 +9,4 @@
     User.create(display_name: 'dave', password: 'securepassword123', email: 'dave@123.com', dob: '12/05/1999')
     Container.create(title: 'Edisya', description: 'I wanna be the very best')
     Category.create(name: 'Cities', description: 'locations within the world where many people gather')
+    Identifier.create(identifier: 'caius')
