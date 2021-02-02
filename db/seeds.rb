@@ -10,3 +10,4 @@
     Container.create(title: 'Edisya', description: 'I wanna be the very best')
     Category.create(name: 'Cities', description: 'locations within the world where many people gather')
     Identifier.create(identifier: 'caius')
+    Information.create(infoTitle: 'Backstory', info: 'was raised by dragons')
