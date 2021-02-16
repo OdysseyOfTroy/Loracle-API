@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_02_175615) do
+ActiveRecord::Schema.define(version: 2021_02_16_162758) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,6 +20,8 @@ ActiveRecord::Schema.define(version: 2021_02_02_175615) do
     t.text "description"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "container_id", null: false
+    t.index ["container_id"], name: "index_categories_on_container_id"
   end
 
   create_table "containers", force: :cascade do |t|
@@ -27,12 +29,16 @@ ActiveRecord::Schema.define(version: 2021_02_02_175615) do
     t.text "description"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "user_id", null: false
+    t.index ["user_id"], name: "index_containers_on_user_id"
   end
 
   create_table "identifiers", force: :cascade do |t|
     t.string "identifier"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "category_id", null: false
+    t.index ["category_id"], name: "index_identifiers_on_category_id"
   end
 
   create_table "information", force: :cascade do |t|
@@ -40,6 +46,8 @@ ActiveRecord::Schema.define(version: 2021_02_02_175615) do
     t.text "info"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "identifier_id", null: false
+    t.index ["identifier_id"], name: "index_information_on_identifier_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -51,4 +59,8 @@ ActiveRecord::Schema.define(version: 2021_02_02_175615) do
     t.date "dob"
   end
 
+  add_foreign_key "categories", "containers"
+  add_foreign_key "containers", "users"
+  add_foreign_key "identifiers", "categories"
+  add_foreign_key "information", "identifiers"
 end
