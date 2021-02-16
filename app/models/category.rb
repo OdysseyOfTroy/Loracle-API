@@ -1,4 +1,4 @@
 class Category < ApplicationRecord
-    belongs_to :Container
+    belongs_to :container
     has_many :identifiers
 end

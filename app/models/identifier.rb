@@ -1,4 +1,4 @@
 class Identifier < ApplicationRecord
-    belongs_to :Category
+    belongs_to :category
     has_many :information
 end

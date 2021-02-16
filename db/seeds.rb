@@ -6,8 +6,9 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-    User.create(display_name: 'dave', password: 'securepassword123', email: 'dave@123.com', dob: '12/05/1999')
-    Container.create(title: 'Edisya', description: 'I wanna be the very best')
-    Category.create(name: 'Cities', description: 'locations within the world where many people gather')
-    Identifier.create(identifier: 'caius')
-    Information.create(infoTitle: 'Backstory', info: 'was raised by dragons')
+
+    user = User.create(display_name: 'john', password: 'securepassword123', email: 'dave@123.com', dob: '12/05/1999')
+    container = user.containers.create(title: 'Edisya', description: 'I wanna be the very best')
+    category = container.categories.create(name: 'Cities', description: 'locations within the world where many people gather')
+    identifier = category.identifiers.create(identifier: 'caius')
+    information = identifier.information.create(infoTitle: 'Backstory', info: 'was raised by dragons')
