@@ -48,6 +48,6 @@ class IdentifiersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def identifier_params
-      params.require(:identifier).permit(:identifier)
+      params.require(:identifier).permit(:title)
     end
 end
