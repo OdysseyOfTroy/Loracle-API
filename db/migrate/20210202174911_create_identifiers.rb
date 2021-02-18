@@ -1,7 +1,7 @@
 class CreateIdentifiers < ActiveRecord::Migration[6.1]
   def change
     create_table :identifiers do |t|
-      t.string :identifier
+      t.string :title
 
       t.timestamps
     end
