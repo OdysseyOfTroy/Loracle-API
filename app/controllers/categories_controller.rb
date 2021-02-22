@@ -1,10 +1,12 @@
 class CategoriesController < ApplicationController
+  before_action :fetch_user
+  before_action :fetch_container
   before_action :set_category, only: %i[ show update destroy ]
 
   # GET /categories
   # GET /categories.json
   def index
-    @categories = Category.all
+    @categories = @container.categories
   end
 
   # GET /categories/1
@@ -15,10 +17,10 @@ class CategoriesController < ApplicationController
   # POST /categories
   # POST /categories.json
   def create
-    @category = Category.new(category_params)
+    @category = @container.categories.new(category_params)
 
     if @category.save
-      render :show, status: :created, location: @category
+      render :show, status: :created
     else
       render json: @category.errors, status: :unprocessable_entity
     end
@@ -28,7 +30,7 @@ class CategoriesController < ApplicationController
   # PATCH/PUT /categories/1.json
   def update
     if @category.update(category_params)
-      render :show, status: :ok, location: @category
+      render :show, status: :ok
     else
       render json: @category.errors, status: :unprocessable_entity
     end
@@ -44,6 +46,14 @@ class CategoriesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_category
       @category = Category.find(params[:id])
+    end
+
+    def fetch_user
+      @user = User.find(params[:user_id])
+    end
+
+    def fetch_container
+      @container = @user.containers.find(params[:container_id])
     end
 
     # Only allow a list of trusted parameters through.

@@ -1,10 +1,14 @@
 class InformationController < ApplicationController
+  before_action :fetch_user
+  before_action :fetch_container
+  before_action :fetch_category
+  before_action :fetch_identifier
   before_action :set_information, only: %i[ show update destroy ]
 
   # GET /information
   # GET /information.json
   def index
-    @information = Information.all
+    @information = @identifier.information
   end
 
   # GET /information/1
@@ -15,10 +19,10 @@ class InformationController < ApplicationController
   # POST /information
   # POST /information.json
   def create
-    @information = Information.new(information_params)
+    @information = @identifier.information.new(information_params)
 
     if @information.save
-      render :show, status: :created, location: @information
+      render :show, status: :created
     else
       render json: @information.errors, status: :unprocessable_entity
     end
@@ -28,7 +32,7 @@ class InformationController < ApplicationController
   # PATCH/PUT /information/1.json
   def update
     if @information.update(information_params)
-      render :show, status: :ok, location: @information
+      render :show, status: :ok
     else
       render json: @information.errors, status: :unprocessable_entity
     end
@@ -44,6 +48,22 @@ class InformationController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_information
       @information = Information.find(params[:id])
+    end
+
+    def fetch_user
+      @user = User.find(params[:user_id])
+    end
+
+    def fetch_container
+      @container = @user.containers.find(params[:container_id])
+    end
+
+    def fetch_category
+      @category = @container.categories.find(params[:category_id])
+    end
+
+    def fetch_identifier
+      @identifier = @category.identifiers.find(params[:identifier_id])
     end
 
     # Only allow a list of trusted parameters through.
