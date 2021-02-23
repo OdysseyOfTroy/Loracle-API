@@ -1,10 +1,13 @@
 class IdentifiersController < ApplicationController
+  before_action :fetch_user
+  before_action :fetch_container
+  before_action :fetch_category
   before_action :set_identifier, only: %i[ show update destroy ]
 
   # GET /identifiers
   # GET /identifiers.json
   def index
-    @identifiers = Identifier.all
+    @identifiers = @category.identifiers
   end
 
   # GET /identifiers/1
@@ -15,10 +18,10 @@ class IdentifiersController < ApplicationController
   # POST /identifiers
   # POST /identifiers.json
   def create
-    @identifier = Identifier.new(identifier_params)
+    @identifier = @category.identifiers.new(identifier_params)
 
     if @identifier.save
-      render :show, status: :created, location: @identifier
+      render :show, status: :created
     else
       render json: @identifier.errors, status: :unprocessable_entity
     end
@@ -28,7 +31,7 @@ class IdentifiersController < ApplicationController
   # PATCH/PUT /identifiers/1.json
   def update
     if @identifier.update(identifier_params)
-      render :show, status: :ok, location: @identifier
+      render :show, status: :ok
     else
       render json: @identifier.errors, status: :unprocessable_entity
     end
@@ -46,8 +49,20 @@ class IdentifiersController < ApplicationController
       @identifier = Identifier.find(params[:id])
     end
 
+    def fetch_user
+      @user = User.find(params[:user_id])
+    end
+
+    def fetch_container
+      @container = @user.containers.find(params[:container_id])
+    end
+
+    def fetch_category
+      @category = @container.categories.find(params[:category_id])
+    end
+
     # Only allow a list of trusted parameters through.
     def identifier_params
-      params.require(:identifier).permit(:identifier)
+      params.require(:identifier).permit(:title)
     end
 end
