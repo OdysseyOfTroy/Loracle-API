@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  resources :users do
-    resources :containers do
-      resources :categories do 
-        resources :identifiers do
-          resources :information
+  resources :users, defaults: { format: :json } do
+    resources :containers, defaults: { format: :json } do
+      resources :categories, defaults: { format: :json } do 
+        resources :identifiers, defaults: { format: :json } do
+          resources :information, defaults: { format: :json }
         end
       end
     end
