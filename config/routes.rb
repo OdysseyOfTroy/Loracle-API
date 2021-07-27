@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  devise_for :users
   resources :users, defaults: { format: :json } do
     resources :containers, defaults: { format: :json } do
       resources :categories, defaults: { format: :json } do 
