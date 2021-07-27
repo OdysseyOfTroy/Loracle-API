@@ -1,4 +1,4 @@
-class CategoriesController < ApplicationController
+class CategoriesController < ApiController
   before_action :fetch_user
   before_action :fetch_container
   before_action :set_category, only: %i[ show update destroy ]

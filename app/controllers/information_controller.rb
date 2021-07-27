@@ -1,4 +1,4 @@
-class InformationController < ApplicationController
+class InformationController < ApiController
   before_action :fetch_user
   before_action :fetch_container
   before_action :fetch_category
