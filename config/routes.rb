@@ -3,12 +3,11 @@
 Rails.application.routes.draw do
   devise_for :users, controllers: { sessions: :sessions, registrations: :registrations },
                         path_names: { sign_in: :login, sign_out: :logout }
-  resources :users, defaults: { format: :json } do
-    resources :containers, defaults: { format: :json } do
-      resources :categories, defaults: { format: :json } do 
-        resources :identifiers, defaults: { format: :json } do
-          resources :information, defaults: { format: :json }
-        end
+
+  resources :containers, defaults: { format: :json } do
+    resources :categories, defaults: { format: :json } do 
+      resources :identifiers, defaults: { format: :json } do
+        resources :information, defaults: { format: :json }
       end
     end
   end
