@@ -1,5 +1,4 @@
 class InformationController < ApiController
-  before_action :fetch_user
   before_action :fetch_container
   before_action :fetch_category
   before_action :fetch_identifier
@@ -50,12 +49,8 @@ class InformationController < ApiController
       @information = Information.find(params[:id])
     end
 
-    def fetch_user
-      @user = User.find(params[:user_id])
-    end
-
     def fetch_container
-      @container = @user.containers.find(params[:container_id])
+      @container = current_user.containers.find(params[:container_id])
     end
 
     def fetch_category

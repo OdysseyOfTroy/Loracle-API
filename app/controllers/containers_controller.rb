@@ -1,11 +1,10 @@
 class ContainersController < ApiController
-  before_action :fetch_user
   before_action :set_container, only: %i[ show update destroy ]
 
   # GET /containers
   # GET /containers.json
   def index
-    @containers = @user.containers
+    @containers = current_user.containers
   end
 
   # GET /containers/1
@@ -16,7 +15,7 @@ class ContainersController < ApiController
   # POST /containers
   # POST /containers.json
   def create
-    @container = @user.containers.new(container_params)
+    @container = current_user.containers.new(container_params)
 
     if @container.save
       render :show, status: :created
@@ -44,11 +43,7 @@ class ContainersController < ApiController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_container
-      @container = @user.containers.find(params[:id])
-    end
-
-    def fetch_user
-      @user = User.find(params[:user_id])
+      @container = current_user.containers.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.

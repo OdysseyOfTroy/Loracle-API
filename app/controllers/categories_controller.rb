@@ -1,5 +1,4 @@
 class CategoriesController < ApiController
-  before_action :fetch_user
   before_action :fetch_container
   before_action :set_category, only: %i[ show update destroy ]
 
@@ -48,12 +47,8 @@ class CategoriesController < ApiController
       @category = Category.find(params[:id])
     end
 
-    def fetch_user
-      @user = User.find(params[:user_id])
-    end
-
     def fetch_container
-      @container = @user.containers.find(params[:container_id])
+      @container = current_user.containers.find(params[:container_id])
     end
 
     # Only allow a list of trusted parameters through.
