@@ -1,4 +1,4 @@
-class ContainersController < ApplicationController
+class ContainersController < ApiController
   before_action :fetch_user
   before_action :set_container, only: %i[ show update destroy ]
 

@@ -1,4 +1,4 @@
-class IdentifiersController < ApplicationController
+class IdentifiersController < ApiController
   before_action :fetch_user
   before_action :fetch_container
   before_action :fetch_category
