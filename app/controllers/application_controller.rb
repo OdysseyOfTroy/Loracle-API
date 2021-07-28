@@ -15,7 +15,7 @@ class ApplicationController < ActionController::API
     end
   
     def authenticate_user
-      render json: { errors: ['Not Authenticated'] }, status: :unauthorized && return unless cookies.signed[:token].present?
+    #   render json: { errors: ['Not Authenticated'] }, status: :unauthorized && return unless cookies.signed[:token].present?
   
       token = cookies.signed[:token]
       jwt_payload = JWT.decode(token, Rails.application.secrets.secret_key_base || ENV['SECRET_KEY_BASE']).first
