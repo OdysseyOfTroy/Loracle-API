@@ -9,7 +9,8 @@ class SessionsController < Devise::SessionsController
     if user&.valid_password?(sign_in_params[:password])
       cookies.signed[:token] = {
         value: user.generate_jwt,
-        httponly: true
+        httponly: true,
+        same_site: "None"
       }
 
       @current_user = user
