@@ -22,8 +22,8 @@ class ApplicationController < ActionController::API
       raise jwt_payload.inspect  
 
       @current_user_id = jwt_payload['id']
-    rescue JWT::ExpiredSignature, JWT::VerificationError, JWT::DecodeError
-      render json: { errors: ['Not Authenticated'] }, status: :unauthorized
+    # rescue JWT::ExpiredSignature, JWT::VerificationError, JWT::DecodeError
+    #   render json: { errors: ['Not Authenticated'] }, status: :unauthorized
     end
   
     def authenticate_user!(_options = {})
